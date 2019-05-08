@@ -13,10 +13,10 @@ endnotes: false
 pagenumber: 1
 bibliography: ../project.bib
 biblio-style: ./resources/ajs.bst
-title: "The Title"
+title: "Effectiveness of Sexual Harassment Complaints Made to Unions in the Federal Workplace"
 author:
 - affiliation: University of Oregon, Sociology
-  name: Aaron Gullickson
+  name: Emily Beecher
 - affiliation: Some Research University
   name: My co-author
 keywords: keywords
@@ -26,9 +26,15 @@ abstract: This is a test abstract
 
 # Introduction
 
-# Background
+In the wake of the #MeToo movement, a lot of awareness was raised with little tangible recourse or interventions made. Since the nature of a majority of the claims made about sexual harassment and sexual violence occurred within the workplace, a common solution posed by activists, especially socialist activists, has been to unionize the workplace. Given the lengthy documentation of unions being masculine environments with sketchy histories of handling sexual harassment and sexual violence, many are skeptical that simply advocating for greater union representation will solve the pervasive problem of sexual assualt and harassment in the workplace. This paper seeks to explore the efficacy of past reports made to unions, and how the outcome of these reports made compares to reports made to other coworkers and management.
+
+(clarify the research question? identify gap in data?)
 
 # Data and Methods
+
+I use a data from a survey conducted by the United States Merit Protection Board to look at the relationship between reports made to union representatives, coworkers, and management to the rate of positive outcomes in instances of sexual harassment and assault in the federal workplace. The study, titled "Sexual Harassment in the Federal Workplace" (SHFW) was issued three times with different questions to the same sample population; the first survey went out in 1980, the second in 1987, and again in 1994. This study was conducted in direct response to a congressional mandate to the Office of Personnel Management to investigate the prevalence of sexual assault and harassment in the federal workplace, specifically among those working within the executive branch of the government.
+
+With use of the Office of Personnel Mangements (OPM) Central Personnel Data File, a disproportionately stratified random sample was compiled consisting of federal employees in the executive branch. It was stratified by sex, race, salary, and organization. The 1980 survey went out by mail to the homes of the people in this sample, 23,000 federal workers based in Washington D.C. The survey was returned at a 85% completion rate, meaning around 19,500 surveys were received in the initial round of surveys. Respondents were asked to recall incidences of sexual assault and harassment that occurred in the previous two years (May 1978-May 1980). The following two surveys were also sent by mail to the sample, still based in Washington D.C., that received the original 1980 survey.
 
 # Results
 
