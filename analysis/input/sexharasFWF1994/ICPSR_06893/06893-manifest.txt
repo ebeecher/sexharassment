@@ -1,0 +1,56 @@
+File Manifest for ICPSR 6893
+
+U.S. Merit Systems Protection Board. SEXUAL HARASSMENT IN THE FEDERAL
+WORKPLACE: 1978-1980, 1987, and 1994. ICPSR version. Washington, DC: U.S.
+Merit Systems Protection Board [producer], 1994. Ann Arbor, MI: Inter-
+university Consortium for Political and Social Research [distributor],
+1997. http://doi.org/10.3886/ICPSR06893.v1
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06893-descriptioncitation.pdf       -       -         -       2014-07-03  -
+
+    06893-related_literature.txt        -       -         -       daily       -
+
+    06893-manifest.txt                  -       -         -       daily       -
+
+
+DS0001 1978-1980 Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06893-0001-Codebook.pdf             -       -         -       1997-09-24  aaf95896b2ffa9f0410c4a014a91f6b9
+
+    06893-0001-Data.txt                 320     20,083    238     1997-09-24  70f8a01d08d42eb8ca1421ccf5b8ab06
+
+    06893-0001-Setup.sps                -       -         -       1997-09-24  2d7a1d4a8d314c00e94fab3c91021948
+
+
+DS0002 1987 Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06893-0002-Codebook.pdf             -       -         -       1997-09-24  d77cc0cb7873749c90abccb8e16b3c7a
+
+    06893-0002-Data.por                 -       8,523     166     1997-09-24  705972466bf9f06bbc3c5432c791509b
+
+    06893-0002-Data.txt                 240     8,523     166     1997-09-24  716fa3d7acd9f97cec49928260c860c6
+
+
+DS0003 1994 Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06893-0003-Codebook-card_image.pdf  -       -         -       1997-09-24  a4ced06e51c83d5f2898ce7a94a164ac
+
+    06893-0003-Data-card_image.por      -       8,081     193     1997-09-24  bef86c090e1bf9c338eb56b2c72f8476
+
+    06893-0003-Data-card_image.txt      80      24,243    193     1997-09-24  a29d979e86cfa312334219af66deddd8
+
