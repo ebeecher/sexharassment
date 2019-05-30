@@ -11,10 +11,39 @@
 
 library(readr)
 
-sexharass <- read_fwf("input/sexharrass_fwf_fixed.txt",
-                      col_positions = fwf_positions(start=c( 1,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,42,43,44,45,46,47,55,65,66,67,68,69,70,71,72,73,74,75,100,101,123,124),
-                                                    end=  c(21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,41,42,43,44,45,46,54,64,65,66,67,68,69,70,71,72,73,74,80,100,101,123,124),
-                                                    col_names=c("controlblock", "Q1A","Q1B","Q2A","Q2B","Q3A","Q3B","Q4A",
-                                                                "Q4B","Q5A","Q5B","Q6A","Q6B","Q7","Q8","Q9","Q10","Q11",
-                                                                "Q12","Q13","Q14","Q15","Q16","Q17","Q18","Q19","Q20A",
-                                                                "Q20B","Q20C","Q20D","Q20E","Q20F","Q20G","Q20H","Q21","Q22","Q27E1","Q27E2","Q30A1","Q30A2")))
+sexharass <- read_fwf("analysis/input/sexharrass_fwf_fixed.txt",
+                      col_positions = fwf_positions(start=c( 1,92,94,96,98,100,102,104,106,108,110,112,123,125,127,129,131),
+                                                    end=  c(21,93,95,97,99,101,103,105,107,109,111,121,124,126,128,130,132),
+                                                    col_names=c("controlblock","Q27A","Q27B","Q27C","Q27D","Q27E","Q27F","Q27G","Q27H","Q27I","Q27J","Q28","Q30A","Q30B","Q30C","Q30D","Q30E")))
+
+sexharass <- na.omit(sexharass)
+sexharass$invest <- NA
+sexharass$invest[sexharass$Q30A=="1" | sexharass$Q30A=="11"] <- "internalbetter"
+sexharass$invest[sexharass$Q30A=="2" | sexharass$Q30A=="12"] <- "internalneutral"
+sexharass$invest[sexharass$Q30A=="3" | sexharass$Q30A=="13"] <- "internalworse"
+#sexharass$invest <- factor(sexharass$invest, levels=c("internalworse", "internalneutral", "internalbetter"), ordered=TRUE)
+
+sexharass$invest[sexharass$Q30B=="1" | sexharass$Q30B=="11"] <- "outsidebetter"
+sexharass$invest[sexharass$Q30B=="2" | sexharass$Q30B=="12"] <- "outsideneutral"
+sexharass$invest[sexharass$Q30B=="3" | sexharass$Q30B=="13"] <- "outsideworse"
+#sexharass$invest <- factor(sexharass$invest, levels=c("outsideworse", "outsideneutral", "outsidebetter"), ordered=TRUE)
+
+sexharass$invest[sexharass$Q30C=="1" | sexharass$Q30C=="11"] <- "unionbetter"
+sexharass$invest[sexharass$Q30C=="2" | sexharass$Q30C=="12"] <- "unionneutral"
+sexharass$invest[sexharass$Q30C=="3" | sexharass$Q30C=="13"] <- "unionworse"
+#sexharass$invest <- factor(sexharass$invest, levels=c("unionworse", "unionneutral", "unionbetter"), ordered=TRUE)
+
+sexharass$invest[sexharass$Q30D=="1" | sexharass$Q30D=="11"] <- "EEObetter"
+sexharass$invest[sexharass$Q30D=="2" | sexharass$Q30D=="12"] <- "EEOneutral"
+sexharass$invest[sexharass$Q30D=="3" | sexharass$Q30D=="13"] <- "EEOworse"
+#sexharass$invest <- factor(sexharass$invest, levels=c("EEOworse", "EEOneutral", "EEObetter"), ordered=TRUE)
+
+sexharass$invest[sexharass$Q30E=="1" | sexharass$Q30E=="11"] <- "otherbetter"
+sexharass$invest[sexharass$Q30E=="2" | sexharass$Q30E=="12"] <- "otherneutral"
+sexharass$invest[sexharass$Q30E=="3" | sexharass$Q30E=="13"] <- "otherworse"
+#sexharass$invest <- factor(sexharass$invest, levels=c("otherworse", "otherneutral", "otherbetter"), ordered=TRUE)
+
+#sexharass$action <- NA
+#sexharass$action[sexharass$Q27A==]
+#code question 27 as actions taken, better worse neutral
+#code question 28 somehow??? collapse down to positive negative neutral outcomes
