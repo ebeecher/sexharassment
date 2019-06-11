@@ -22,6 +22,8 @@ sexharass <- read_fwf("analysis/input/sexharrass_fwf_fixed.txt", trim_ws = FALSE
                                                                 "Q27I","Q27J","Q28","Q30A","Q30B","Q30C",
                                                                 "Q30D","Q30E")))
 
+sexharass <- na.omit(sexharass)
+
 #Q20: did they experience sex harassment with degrees of frequency 
 #(282 people experienced an incident and 7799 didn't)
 sexharass$incident <- NA
@@ -41,7 +43,6 @@ sexharass$work_better <- substr(sexharass$Q28, 7, 7)=="2"
 sexharass$work_nochange <- substr(sexharass$Q28, 8, 8)=="3"
 
 #Q30: kind of investigation pursued, asked of people who had an incident
-sexharass <- na.omit(sexharass)
 
 sexharass$internalinvest <- NA
 sexharass$internalinvest <- sexharass$Q30A!="  "
