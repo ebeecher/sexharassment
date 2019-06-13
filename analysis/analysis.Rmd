@@ -11,9 +11,24 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 source("useful_functions.R")
+load("output/data.RData")
+library(ggplot2)
+library(scales)
+library(ggalt)
+library(ggrepel)
+library(readr)
 ```
 
 # Introduction
 <a href="#top">Back to top</a>
 
 Use this R Markdown to perform the main analysis for the project. I use this basically as a lab notebook. It contains the main analysis and a variety of sensitivity analysis. The code in this documents serves as a baseline for the eventual tables and figures that will go into the paper. At the same time it will serve as a record of all supplementary analyses performed. 
+
+```{r figure1, include=FALSE}
+ggplot(sexharass, aes(x=bad_outcome, y=incident, group=1))+
+  geom_bar()+
+  scale_y_continuous()+
+  labs(x="bad outcome", y="number of incidents",
+       title="Title")+
+  theme_bw()
+```
