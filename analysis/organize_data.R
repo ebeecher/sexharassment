@@ -29,7 +29,6 @@ sexharass <- read_fwf("analysis/input/sexharrass_fwf_fixed.txt", trim_ws = FALSE
 #Q20: did they experience sex harassment with degrees of frequency 
 #(282 people experienced an incident and 7799 didn't)
 sexharass$incident <- NA
-sexharass$incident[sexharass$incident==" "] <- NA
 sexharass$incident <- sexharass$Q20A!="1" & sexharass$Q20B!="1" & sexharass$Q20C!="1" & 
   sexharass$Q20D!="1" & sexharass$Q20E!="1" & sexharass$Q20F!="1" & sexharass$Q20G!="1" & 
   sexharass$Q20H!="1"
@@ -61,6 +60,7 @@ sexharass$neutral_outcome <- substr(sexharass$Q28, 8, 8)=="3"
 
 sexharass$bad_outcome <- sexharass$work_worse | sexharass$bad_ref | sexharass$transfer | 
   sexharass$fired | sexharass$quit_newjob | sexharass$quit_nojob
+
 
 #how do I drop the cases for the outcome variables for people who didn't experience an incident?
 #code for if people answered more than one
@@ -95,3 +95,4 @@ sexharass <- subset(sexharass, incident,
                              "internalinvest", "outsideinvest", "grievance", "eeoinvest", "sex"))
 
 save(sexharass, file="analysis/output/data.RData")
+
