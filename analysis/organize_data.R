@@ -13,14 +13,14 @@ library(readr)
 
 sexharass <- read_fwf("analysis/input/sexharrass_fwf_fixed.txt", trim_ws = FALSE,
                       col_positions = fwf_positions(start=c( 1,66,67,68,69,70,71,72,73,92,94,96,98,100,101,
-                                                             102,104,106,108,110,112,123,125,127,129,131),
+                                                             102,104,106,108,110,112,123,125,127,129,131,211),
                                                     end=  c(21,66,67,68,69,70,71,72,73,93,95,97,99,100,101,
-                                                            103,105,107,109,111,121,124,126,128,130,132),
+                                                            103,105,107,109,111,121,124,126,128,130,132,211),
                                                     col_names=c("controlblock","Q20A","Q20B","Q20C","Q20D",
                                                                 "Q20E","Q20F","Q20G","Q20H","Q27A","Q27B",
                                                                 "Q27C","Q27D","Q27Ei","Q27Eii","Q27F","Q27G","Q27H",
                                                                 "Q27I","Q27J","Q28","Q30A","Q30B","Q30C",
-                                                                "Q30D","Q30E")))
+                                                                "Q30D","Q30E","sex")))
 
 #Am I dealing with missing values correctly?
 
@@ -55,11 +55,15 @@ sexharass$transfer <- substr(sexharass$Q28, 3, 3)=="1"
 sexharass$fired <- substr(sexharass$Q28, 4, 4)=="1"
 sexharass$quit_newjob <- substr(sexharass$Q28, 5, 5)=="1"
 sexharass$quit_nojob <- substr(sexharass$Q28, 6, 6)=="1"
-sexharass$work_better <- substr(sexharass$Q28, 7, 7)=="2"
-sexharass$work_nochange <- substr(sexharass$Q28, 8, 8)=="3"
+
+sexharass$good_outcome <- substr(sexharass$Q28, 7, 7)=="2"
+sexharass$neutral_outcome <- substr(sexharass$Q28, 8, 8)=="3"
+
+sexharass$bad_outcome <- sexharass$work_worse | sexharass$bad_ref | sexharass$transfer | 
+  sexharass$fired | sexharass$quit_newjob | sexharass$quit_nojob
 
 #how do I drop the cases for the outcome variables for people who didn't experience an incident?
-
+#code for if people answered more than one
 
 
 #Q30: kind of investigation pursued, asked of people who had an incident
@@ -71,8 +75,8 @@ sexharass$internalinvest <- sexharass$Q30A!="   "
 sexharass$outsideinvest <- NA
 sexharass$outsideinvest <- sexharass$Q30B!="  "
 
-sexharass$unioninvest <- NA
-sexharass$unioninvest <- sexharass$Q30C!="  "
+sexharass$grievance <- NA
+sexharass$grievance <- sexharass$Q30C!="  "
 
 sexharass$eeoinvest <- NA
 sexharass$eeoinvest <- sexharass$Q30D!="  "
@@ -80,3 +84,14 @@ sexharass$eeoinvest <- sexharass$Q30D!="  "
 sexharass$otherinvest <- NA
 sexharass$otherinvest <- sexharass$Q30E!="  "
 
+#Q69 - sex: to control for sex
+sexharass$sex[sexharass$sex==" "] <- NA
+sexharass$sex[sexharass$sex=="1"] <- "male"
+sexharass$sex[sexharass$sex=="2"] <- "female"
+
+#data incident subset
+sexharass <- subset(sexharass, incident, 
+                    select=c("file_complaint", "good_outcome", "neutral_outcome", "bad_outcome", 
+                             "internalinvest", "outsideinvest", "grievance", "eeoinvest", "sex"))
+
+save(sexharass, file="analysis/output/data.RData")
