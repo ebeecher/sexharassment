@@ -88,15 +88,13 @@ sexharass$otherinvest <- NA
 sexharass$otherinvest <- sexharass$Q30E!="  "
 
 #Q69 - sex: to control for sex
-sexharass$sex[sexharass$sex==" "] <- NA
-sexharass$sex[sexharass$sex=="1"] <- "male"
-sexharass$sex[sexharass$sex=="2"] <- "female"
+sex <- as.numeric(sexharass$sex)
 
 #data incident subset
 sexharass <- subset(sexharass, incident, 
                     select=c("incident", "file_complaint", "good_outcome", "neutral_outcome", "bad_outcome",
                              "bad_outcome_fctr", "file_complaint_fctr",
-                             "outsideinvest", "grievance", "eeoinvest", "sex"))
+                             "outsideinvest", "grievance", "eeoinvest", "internalinvest", "otherinvest", "sex"))
 
 
 save(sexharass, file="analysis/output/data.RData")

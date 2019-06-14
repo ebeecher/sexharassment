@@ -27,15 +27,18 @@ library(stargazer)
 Use this R Markdown to perform the main analysis for the project. I use this basically as a lab notebook. It contains the main analysis and a variety of sensitivity analysis. The code in this documents serves as a baseline for the eventual tables and figures that will go into the paper. At the same time it will serve as a record of all supplementary analyses performed. 
 
 ```{r figure1, echo=FALSE, message=FALSE}
-ggplot(sexharass, aes(x=bad_outcome, y=..prop.., group=1))+
+ggplot(sexharass, aes(x=bad_outcome_fctr, y=..prop.., group=1))+
   geom_bar()+
-  facet_wrap(~file_complaint)+
+  facet_wrap(~file_complaint_fctr)+
   scale_y_continuous(labels=scales::percent)+
   labs(x="Instance of sexual harassment: outcome", y=NULL, 
        title="Effect of formal complaints on bad outcomes: sexual harassment")+
   theme_bw()
 ```
 
+I'm actually pretty surprised by how many more people experience a bad outcome when a report is filed, but it also makes a lot of sense because people must be filing complaints when things get really bad, they fear retribution, or they have already experienced significant negative outcomes. This data isn't convincing.
+
+This is also the only figure I could think of creating for this particular dataset.
 
 ```{r models, results="asis"", message=FALSE}
 model1 <- glm(bad_outcome~file_complaint, data=sexharass)
@@ -48,6 +51,8 @@ screenreg(list(model1, model2, model3, model4),
        caption.above = TRUE)
 ```
 
+These are the models I think I'm actually going with for the project. It controls for complaint type and shows the strong relationships between complaint filed and bad outcome. BIC scores are all decent as well.
+
 ```{r models, results="asis"", message=FALSE}
 model1 <- glm(bad_outcome~file_complaint, data=sexharass)
 model2 <- glm(bad_outcome~grievance, data=sexharass)
@@ -58,9 +63,11 @@ model6 <- glm(bad_outcome~file_complaint+grievance+outsideinvest, data=sexharass
 model7 <- glm(bad_outcome~sex, data=sexharass)
 model8 <- glm(bad_outcome~file_complaint+sex, data=sexharass)
 screenreg(list(model1, model2, model3, model4, model5, model6, model7, model8),
-       custom.coef.names = c("Intercept", "complaint filed", "filed grievance", "outside investigation", "sex"),
+       custom.coef.names = c("Intercept", "complaint filed", "filed grievance", "outside investigation", "male", "female"),
        caption="Regression models predicting a bad outcome to an instance of sexual harassment",
        caption.above = TRUE)
 ```
 
-
+I controlled for sex of the respondent thinking that maybe women and men would have different experiences with sexual harassment, but this seemed to make hardly any difference. But also, I'm thinking that I screwed up the sex variable. I couldn't get it to work in any way that I was trying, but now it separated sex into two variables??
+Important to note here and above that when the complaint filed variable is controlled for, specific investigations aren't statistically significant. (except there's something going on with the outside investigation variable? Models 4 and 6.)
+BIC scores indicated that my best model here is model four.
