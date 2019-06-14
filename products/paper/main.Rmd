@@ -20,8 +20,8 @@ author:
 - affiliation: Some Research University
   name: My co-author
 keywords: keywords
-thanks: Thanks to people and stuff
-abstract: This is a test abstract
+thanks: Thanks to Aaron Gullickson for not failing me in this course and supporting me in my struggles with this data set. I promise I will try a quant project sometime in the future. I am determined not to let this be the end.
+abstract: This is a test abstract.
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
