@@ -17,6 +17,8 @@ library(scales)
 library(ggalt)
 library(ggrepel)
 library(readr)
+library(texreg)
+library(stargazer)
 ```
 
 # Introduction
@@ -24,11 +26,41 @@ library(readr)
 
 Use this R Markdown to perform the main analysis for the project. I use this basically as a lab notebook. It contains the main analysis and a variety of sensitivity analysis. The code in this documents serves as a baseline for the eventual tables and figures that will go into the paper. At the same time it will serve as a record of all supplementary analyses performed. 
 
-```{r figure1, include=FALSE}
-ggplot(sexharass, aes(x=bad_outcome, y=incident, group=1))+
+```{r figure1, echo=FALSE, message=FALSE}
+ggplot(sexharass, aes(x=bad_outcome, y=..prop.., group=1))+
   geom_bar()+
-  scale_y_continuous()+
-  labs(x="bad outcome", y="number of incidents",
-       title="Title")+
+  facet_wrap(~file_complaint)+
+  scale_y_continuous(labels=scales::percent)+
+  labs(x="Instance of sexual harassment: outcome", y=NULL, 
+       title="Effect of formal complaints on bad outcomes: sexual harassment")+
   theme_bw()
 ```
+
+
+```{r models, results="asis"", message=FALSE}
+model1 <- glm(bad_outcome~file_complaint, data=sexharass)
+model2 <- glm(bad_outcome~file_complaint+grievance, data=sexharass)
+model3 <- glm(bad_outcome~file_complaint+outsideinvest, data=sexharass)
+model4 <- glm(bad_outcome~file_complaint+grievance+outsideinvest, data=sexharass)
+screenreg(list(model1, model2, model3, model4),
+       custom.coef.names = c("Intercept", "complaint filed", "filed grievance", "outside investigation"),
+       caption="Regression models predicting a bad outcome to an instance of sexual harassment",
+       caption.above = TRUE)
+```
+
+```{r models, results="asis"", message=FALSE}
+model1 <- glm(bad_outcome~file_complaint, data=sexharass)
+model2 <- glm(bad_outcome~grievance, data=sexharass)
+model3 <- glm(bad_outcome~outsideinvest, data=sexharass)
+model4 <- glm(bad_outcome~file_complaint+outsideinvest, data=sexharass)
+model5 <- glm(bad_outcome~file_complaint+grievance, data=sexharass)
+model6 <- glm(bad_outcome~file_complaint+grievance+outsideinvest, data=sexharass)
+model7 <- glm(bad_outcome~sex, data=sexharass)
+model8 <- glm(bad_outcome~file_complaint+sex, data=sexharass)
+screenreg(list(model1, model2, model3, model4, model5, model6, model7, model8),
+       custom.coef.names = c("Intercept", "complaint filed", "filed grievance", "outside investigation", "sex"),
+       caption="Regression models predicting a bad outcome to an instance of sexual harassment",
+       caption.above = TRUE)
+```
+
+
