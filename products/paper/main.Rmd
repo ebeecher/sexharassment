@@ -3,10 +3,10 @@ output:
   pdf_document:
     citation_package: natbib
     fig_caption: yes
-    template: ./resources/aog-latex-ms.tex
+#    template: ./resources/aog-latex-ms.tex
   word_document:
     reference_docx: ./resources/aog_word_style.docx
-fontfamily: mathpazo
+#fontfamily: mathpazo
 fontsize: 11pt
 anonymous: false
 endnotes: false
@@ -23,16 +23,13 @@ keywords: keywords
 thanks: Thanks to Aaron Gullickson for not failing me in this course and supporting me in my struggles with this data set. I promise I will try a quant project sometime in the future. I am determined not to let this be the end.
 abstract: This is a test abstract.
 ---
-```{r setup, include=FALSE}
+```{r setup, message=FALSE, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 load("../../analysis/output/data.RData")
 library(ggplot2)
-library(scales)
-library(ggalt)
-library(ggrepel)
 library(readr)
 library(texreg)
-library(stargazer)
+library(tinytex)
 ```
 
 
@@ -65,12 +62,12 @@ ggplot(sexharass, aes(x=bad_outcome_fctr, y=..prop.., group=1))+
   theme_bw()
 ```
 
-```{r models, results="asis"", warning=FALSE, message=FALSE}
+```{r models,echo=FALSE, warning=FALSE, message=FALSE}
 model1 <- glm(bad_outcome~file_complaint, data=sexharass)
 model2 <- glm(bad_outcome~file_complaint+grievance, data=sexharass)
 model3 <- glm(bad_outcome~outsideinvest, data=sexharass)
 model4 <- glm(bad_outcome~file_complaint+grievance+outsideinvest, data=sexharass)
-screenreg(list(model1, model2, model3, model4),
+texreg(list(model1, model2, model3, model4),
        custom.coef.names = c("Intercept", "complaint filed", "filed grievance", "outside investigation"),
        caption="Regression models predicting a bad outcome to an instance of sexual harassment",
        caption.above = TRUE)
