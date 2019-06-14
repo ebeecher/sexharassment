@@ -44,7 +44,7 @@ sexharass$file_neutral <- sexharass$Q27Eii=="2"
 sexharass$file_neg <- NA
 sexharass$file_neg <- sexharass$Q27Eii=="3"
 
-sexharass$file_complaint <- factor(sexharass$file_complaint==1, labels=c("Did not file complaint", "Filed complaint"))
+sexharass$file_complaint_fctr <- factor(sexharass$file_complaint==1, labels=c("Did not file complaint", "Filed complaint"))
 
 #Q28: positive, negative, neutral outcome, asked of everyone.
 #I don't think this variable is going to work because they were asked to answer this question
@@ -62,7 +62,7 @@ sexharass$neutral_outcome <- substr(sexharass$Q28, 8, 8)=="3"
 
 sexharass$bad_outcome <- sexharass$work_worse | sexharass$bad_ref | sexharass$transfer | 
   sexharass$fired | sexharass$quit_newjob | sexharass$quit_nojob
-sexharass$bad_outcome <- factor(sexharass$bad_outcome==1, labels=c("Neutral/Positive outcome", "Bad outcome"))
+sexharass$bad_outcome_fctr <- factor(sexharass$bad_outcome==1, labels=c("Neutral/Positive outcome", "Bad outcome"))
 
 
 #how do I drop the cases for the outcome variables for people who didn't experience an incident?
@@ -94,7 +94,8 @@ sexharass$sex[sexharass$sex=="2"] <- "female"
 
 #data incident subset
 sexharass <- subset(sexharass, incident, 
-                    select=c("incident", "file_complaint", "good_outcome", "neutral_outcome", "bad_outcome", 
+                    select=c("incident", "file_complaint", "good_outcome", "neutral_outcome", "bad_outcome",
+                             "bad_outcome_fctr", "file_complaint_fctr",
                              "outsideinvest", "grievance", "eeoinvest", "sex"))
 
 
